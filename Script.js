@@ -1,67 +1,86 @@
-let prompt = document.querySelector(".prompt");
-let sendhBtn = document.querySelector(".btn");
-let chatContainer = document.querySelector(".chat-container")
-let container = document.querySelector(".container")
-let userMassage = null;
-// CHATBOX FUNCTION
+const promptInput = document.querySelector(".prompt");
+const sendBtn = document.querySelector(".btn");
+const chatContainer = document.querySelector(".chat-container");
+const container = document.querySelector(".container");
 
-let createChatBox = (html,className)=>{
-    let div = document.createElement("div");
-    div.classList.add(className);
-    div.innerHTML=html;
+let isLoading = false;
+
+const createChatBox = (content, className) => {
+    const div = document.createElement("div");
+    div.className = className;
+    div.appendChild(content);
     return div;
-}
+};
 
-// show Loading function
-let showLoading = ()=>{
-    let html = `<img src="./ai-img.jfif" alt="" width="50px">
-             <p></p>
-                  `
-                  let aiChatBox = createChatBox(html,"ai-chat")
-                    chatContainer.appendChild(aiChatBox);
-                    getApiResponce(aiChatBox)
-}
+const showLoading = (message) => {
+    const p = document.createElement("p");
+    p.innerText = "Thinking...";
 
+    const img = document.createElement("img");
+    img.src = "./ai-img.jfif";
+    img.width = 50;
 
-// ADD EVENT ON SENT BUTTON 
-sendhBtn.addEventListener("click",()=>{
-    userMassage = prompt.value;
-    prompt.value='';
-    if(!userMassage) return;
+    const box = document.createElement("div");
+    box.append(img, p);
+    box.className = "ai-chat";
 
-    let html = ` <img src="./user-img.jfif" alt="" width="50px">
-                 <p>${userMassage}</p>`;
+    chatContainer.appendChild(box);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
 
-    let userChatBox = createChatBox(html,"user-chat");
-    chatContainer.appendChild(userChatBox);
-    container.style.display="none";
+    getApiResponse(message, p);
+};
 
-    setTimeout(showLoading,1000);
+sendBtn.addEventListener("click", sendMessage);
+
+promptInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") sendMessage();
 });
 
+function sendMessage() {
+    if (isLoading) return;
 
-async function getApiResponce(aiChatBox){
-    let p = aiChatBox.querySelector("p");
+    const message = promptInput.value.trim();
+    if (!message) return;
 
+    isLoading = true;
+    promptInput.value = "";
 
-    try{
-        let res = await fetch("http://127.0.0.1:5000/chat", {
+    const p = document.createElement("p");
+    p.innerText = message;
+
+    const img = document.createElement("img");
+    img.src = "./user-img.jfif";
+    img.width = 50;
+
+    const userBox = document.createElement("div");
+    userBox.className = "user-chat";
+    userBox.append(img, p);
+
+    chatContainer.appendChild(userBox);
+    if (container.style.display !== "none") {
+        container.style.display = "none";
+    }
+
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    setTimeout(() => showLoading(message), 500);
+}
+
+async function getApiResponse(message, pElement) {
+    try {
+        const res = await fetch("http://127.0.0.1:5000/chat", {
             method: "POST",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body: JSON.stringify({
-                prompt: userMassage
-            })
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ prompt: message })
         });
 
-        let data = await res.json();
-        p.innerText = data.reply;
-        
-         
-
-    }catch(error){
-        p.innerText = "⚠️ Error getting AI response";
-        console.error(error);
+        const data = await res.json();
+        pElement.innerText = data.reply;
+    } catch (err) {
+        pElement.innerText = "⚠️ Server error";
+        console.error(err);
+    } finally {
+        isLoading = false;
     }
 }
+

@@ -1,120 +1,143 @@
-*{
-    margin:0px;
-    padding:0px;
+* {
+    margin: 0px;
+    padding: 0px;
     box-sizing: border-box;
-    font-family: sans-serif;
-   
+    font-family: 'Poppins', sans-serif;
 }
-body{
-    width:100%;
-    height:100%;
-    background-color: rgb(4, 18, 16);
+
+body {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom,
+            #0b132b,
+            #020617);
 }
-.container{
-    height:100vh;
+
+.container {
+    min-height: 100vh;
     background-color: rgb(4, 18, 16);
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    display:block;
+    justify-content: center;
+    padding: 15px;
 }
-.container h1{
+
+.container h1 {
     font-size: 8vw;
-    background: linear-gradient(to right , rgb(67, 161, 255) ,rgb(29, 109, 58));
+    background: linear-gradient(to right, rgb(67, 161, 255), rgb(29, 109, 58));
     background-clip: text;
-    color:transparent;
+    color: transparent;
 }
-.container h4{
-     background: linear-gradient(to left , rgb(67, 161, 255) ,rgb(29, 109, 58));
-     background-clip: text;
-    color:transparent;
+
+.container h4 {
+    background: linear-gradient(to left, rgb(67, 161, 255), rgb(29, 109, 58));
+    background-clip: text;
+    color: transparent;
 }
-.prompt-area{
-    width:100%;
-    height:10%;
-    background-color:rgb(4, 18, 16);
-    position:fixed;
+
+.prompt-area {
+    width: 100%;
+    height: 10%;
+    background-color: rgb(4, 18, 16);
+    position: fixed;
     bottom: 0;
     display: flex;
     justify-content: center;
 }
-.prompt-area input{
-    width:70%;
-    height:80%;
+
+.prompt-area input {
+    width: 70%;
+    height: 80%;
     margin: auto;
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
     margin-right: 0px;
-    font-size:20px;
+    font-size: 20px;
     padding: 4px;
     padding-left: 10px;
-    border:1px solid black;
+    border: 1px solid black;
     box-shadow: 2px 2px 5px 5px black;
 }
-.prompt-area input:focus{
-    outline:none;
+
+.prompt-area input:focus {
+    outline: none;
 }
-.prompt-area input::placeholder{
+
+.prompt-area input::placeholder {
     font-size: 15px;
-    padding-left:15px;
+    padding-left: 15px;
 }
-.prompt-area button{
-    width:100px;
-    height:80%;
+
+.prompt-area button {
+    width: 100px;
+    height: 80%;
     margin: auto;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
     margin-left: 0px;
-    font-size:18px;
+    font-size: 18px;
     padding: 4px;
-    border:1px solid black;
+    border: 1px solid black;
     box-shadow: 2px 2px 5px 5px black;
     cursor: pointer;
-    background: linear-gradient(to right , rgb(67, 161, 255) ,rgb(29, 109, 58));
+    background: linear-gradient(to right, rgb(67, 161, 255), rgb(29, 109, 58));
     color: white;
     font-weight: 500;
 
 }
-.chat-container{
-    width:100%;
-    max-height: 80vh;
+
+.chat-container {
+    width: 100%;
+    max-height: calc(100vh - 160px);
+    /* space for input */
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap:20px;
+    gap: 20px;
     padding: 30px;
-    background-color:rgb(4, 18, 16) ;
-    margin-top: 100px;
-    
+    background-color: rgb(4, 18, 16);
 }
-  .user-chat img{
+
+.user-chat img {
     border-radius: 50%;
 }
-  .ai-chat img{
+
+.ai-chat img {
     border-radius: 50%;
 }
-.user-chat{
+
+.user-chat {
     max-width: 80%;
     max-height: max-content;
-    padding:20px;
+    padding: 20px;
     display: flex;
     background-color: rgb(38, 36, 36);
-    color:white;
-    gap:10px;
+    color: white;
+    gap: 10px;
     align-self: flex-end;
     border-radius: 20px 20px 0px 20px;
-    
 }
-.ai-chat{
-     max-width: 80%;
-     max-height: max-content;
-    padding:20px;
+
+.ai-chat {
+    max-width: 80%;
+    max-height: max-content;
+    padding: 20px;
     display: flex;
-    gap:10px;
+    gap: 10px;
     background-color: rgb(52, 49, 49);
-    color:white;
+    color: white;
     align-self: flex-start;
     border-radius: 20px 20px 20px 0px;
-    
 }
+
+.user-chat,
+.ai-chat {
+    line-height: 1.5;
+}
+
+.user-chat p,
+.ai-chat p {
+    word-wrap: break-word;
+}
+
