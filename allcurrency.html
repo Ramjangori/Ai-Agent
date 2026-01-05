@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Currency Coin</title>
+    <link rel="stylesheet" href="./style1.css">
+    <style>
+        .green {
+            color: green;
+            font-weight: bold;
+        }
+
+        .red {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <img class="logo" src="assets/logo.jfif" alt="Logo">
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#" onclick="event.preventDefault(); alert('Coming Soon')">Market</a></li>
+            <li><a href="#" onclick="event.preventDefault(); alert('Coming Soon')">Features</a></li>
+            <li><a href="#" onclick="event.preventDefault(); alert('Coming Soon')">About Us</a></li>
+            <li><a href="#" onclick="event.preventDefault(); alert('Coming Soon')">White Paper</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <a href="#" onclick="event.preventDefault(); alert('Language Can not Change')">EN</a>
+        </div>
+    </nav>
+
+
+    <div class="coin-header">
+        <div class="left">
+            <ul>
+                <li class="star">*</li>
+                <li>Coin</li>
+            </ul>
+        </div>
+
+        <div class="right">
+            <ul>
+                <li>Price</li>
+                <li>24H% Change</li>
+                <li>Total Volume</li>
+                <li>Market Cap</li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="main-coin-container px-10 mt-6"></div>
+    <script src="./js/cryptoList.js"></script>
+    <!-- Chatbot mount point -->
+    <div id="chatbot-root"></div>
+    <script src="./chatbot/chatbot.js"></script>
+
+</body>
+
+</html>
